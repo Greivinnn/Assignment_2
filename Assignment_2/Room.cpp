@@ -4,51 +4,68 @@
 
 using namespace Assignment_2;
 
-Room::Room(std::string item, std::string trap, bool isExit, int roomNumber)
-	: _item(item), _trap(trap), _isExit(isExit), _roomNumber(roomNumber)
+// Updated constructor to support traps and potions
+Room::Room(bool isExit, int roomNumber)
+    : _isExit(isExit), _roomNumber(roomNumber), _trap(false), _item(false)
 {
+    if (!isExit) // No trap or potion in the winning room
+    {
+        int chance = rand() % 3; // 0 = nothing, 1 = trap, 2 = potion
+        if (chance == 1)
+        {
+            _trap = true;
+        }
+        else if (chance == 2)
+        {
+            _item = true;
+        }
+    }
 }
 
 Room::~Room()
 {
 }
 
+// Room Number
 void Room::setRoomNumber(int roomNumber)
 {
-	_roomNumber = roomNumber;
+    _roomNumber = roomNumber;
 }
 
 int Room::getRoomNumber() const
 {
-	return _roomNumber;
+    return _roomNumber;
 }
 
-std::string Room::getItem() const
+// Traps
+bool Room::hasTrap() const
 {
-	return _item;
+    return _trap;
 }
 
-void Room::setItem(std::string item)
+void Room::setTrap(bool hasTrap)
 {
-	_item = item;
+    _trap = hasTrap;
 }
 
-std::string Room::getTrap() const
+// Healing Potions
+bool Room::hasHealingPotion() const
 {
-	return _trap;
+    return _item;
 }
 
-void Room::setTrap(std::string trap)
+void Room::setHealingPotion(bool hasHealingPotion)
 {
-	_trap = trap;
+    _item = hasHealingPotion;
 }
 
+// Exit Room
 bool Room::getIsExit() const
 {
-	return _isExit;
+    return _isExit;
 }
 
 void Room::setIsExit(bool isExit)
 {
-	_isExit = isExit;
+    _isExit = isExit;
 }
