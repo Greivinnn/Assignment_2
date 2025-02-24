@@ -14,8 +14,10 @@ namespace Assignment_2
 		~GameEngine();
 
 		void startGame();
-		void endGame();
-
+		void YouLostGame();
+		void YouWinGame();
+		void PrintArt();
+		void PrintArt2();
 	private:
 		std::string _playerName2;
 		int _playerHealth;
